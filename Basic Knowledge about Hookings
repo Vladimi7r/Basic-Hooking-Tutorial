@@ -1,0 +1,30 @@
+Hey guys, it's SliceCast here. This tutorial is for Advanced Modders who wants to step up their games to get better! Could be for newbies too.
+I will show you some basics examples on how to hook a function.
+
+Now let's say our Type Functions are (int, float, bool, double) and that we're doing a int/integer type.
+
+C++:
+//the void *instance is a self-created variable.
+int (*old_Kills)(void *instance);
+int Kills(void *instance) {
+    //Check if instance is NULL to prevent CRASH
+    if (instance != NULL)
+    {
+        return 99999; //Return how many value
+    }
+    //return the original value (this code isn't really needed if you have a toggle/switch)
+    return old_Kills(instance);
+}
+Also make sure to call your hooks with MsHook or your mod won't work.
+Example:
+C++:
+MsHookFunction((void*)getAbsoluteAddress(OFFSETS), (void*)Kills, (void**)&old_Kills);
+If it's a bool, then simple. Just return/put "true" or "false".
+
+If it's a float, then return a 99.0 or whatever.
+
+This is way better than Patching. We don't need to use Hex Values for hooking. Hooking is way better, you can return any value you want.
+
+I might make tutorial on how to do Function Pointers and Strings, but as of now just learn this.
+
+:)
